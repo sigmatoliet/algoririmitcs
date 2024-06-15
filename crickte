@@ -7,13 +7,13 @@ public class cricket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // CCRICKETTTTTTTTTTTT
+        print("crickets");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Grasshioesprs!")
+        
     }
 }
-
