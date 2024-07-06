@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+
+    public float speed;
+    public Transform target;
+    public int playerDamage = 2;
+
+    [SerializeField] float distance;
+
+    // Update is called once per frame
+    void Update()
+    {
+        distance = Vector3.Distance(transform.position, target.position);
+
+        //Changes the NPC position to a new one every frame
+        if(Vector3.Distance(transform.position, target.position) > 1.25)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        }
+
+        //Turns the NPC each frame to face the target (Only uses the X and Z coordinates to rotate the enemy horizontally. 
+        //Vertical Rotation is limited to looking forward.)
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        Player player = other.gameObject.GetComponent<Player>();
+
+        if (player != null)
+        {
+            player.TakeDamage(playerDamage);
+            return;
+        }
+    }
+}
